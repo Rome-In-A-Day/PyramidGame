@@ -1,0 +1,30 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/TitleScreen.uss?fileID=7433441132597879392&amp;guid=8ce59458ee16a5b4993a72a530e58358&amp;type=3#TitleScreen" />
+    <MenuManager name="MenuManager" focusable="false" style="visibility: hidden; display: flex; height: 100%; width: 100%; flex-grow: 1; align-items: flex-start; justify-content: space-between; align-self: flex-end;">
+        <ui:VisualElement name="TitleScreen" style="flex-grow: 1; background-color: rgb(0, 0, 0); flex-direction: row; justify-content: center; align-items: stretch; width: auto; height: auto; align-self: center; background-image: url(&apos;project://database/Assets/UI/Images/AnimusWhite.jpg?fileID=2800000&amp;guid=5c772242db356674796f3e145d21233e&amp;type=3#AnimusWhite&apos;); visibility: visible; -unity-background-scale-mode: scale-to-fit; display: none;">
+            <ui:VisualElement name="Left" style="flex-grow: 1; background-color: rgba(217, 17, 17, 0); height: auto; width: auto; flex-direction: column;" />
+            <ui:VisualElement name="Middle" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); justify-content: center;">
+                <ui:Button text="Start" display-tooltip-when-elided="true" name="Start" tabindex="1" class="titleButton" />
+                <ui:Button text="Options" display-tooltip-when-elided="true" name="Options" tabindex="2" focusable="true" class="titleButtonNoHover" />
+                <ui:Button text="Exit" display-tooltip-when-elided="true" name="Exit" tabindex="3" class="titleButton" style="-unity-text-align: middle-center;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Right" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="GameScreen" style="flex-grow: 1; display: flex; justify-content: flex-end; align-items: flex-start; flex-direction: row; align-self: center; visibility: visible; width: 100%; height: 100%;">
+            <ui:VisualElement name="InGameMenu" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: stretch; margin-left: 22%; margin-right: 22%; margin-top: 22%; margin-bottom: 22%; background-image: url(&apos;project://database/Assets/Cards%20Asset/Backgrounds/background_2.png?fileID=2800000&amp;guid=fa01237d7f005ed40888ca29481e08e5&amp;type=3#background_2&apos;); -unity-background-scale-mode: stretch-to-fill; display: flex; border-top-left-radius: 41px; border-bottom-left-radius: 41px; border-top-right-radius: 41px; border-bottom-right-radius: 41px;">
+                <ui:Button text="Back" display-tooltip-when-elided="true" name="Back" class="titleButton" />
+                <ui:Button text="Restart" display-tooltip-when-elided="true" name="InGameRestart" tabindex="2" class="titleButton" />
+                <ui:Button text="Exit" display-tooltip-when-elided="true" name="InGameExit" tabindex="3" class="titleButton" style="-unity-text-align: middle-center; display: flex;" />
+            </ui:VisualElement>
+            <ui:Button display-tooltip-when-elided="true" name="MenuButton" style="background-image: url(&apos;project://database/Assets/UI/Images/menu.png?fileID=21300000&amp;guid=79390154f14119b46bb7823897478228&amp;type=3#menu&apos;); display: flex; right: 0; top: 0;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="EndScreen" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 100%; height: 100px; display: none; visibility: visible;">
+            <ui:VisualElement name="EndContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); padding-left: 30%; padding-right: 30%; padding-top: 15%; padding-bottom: 15%; justify-content: center;">
+                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Cards%20Asset/Backgrounds/background_2.png?fileID=2800000&amp;guid=fa01237d7f005ed40888ca29481e08e5&amp;type=3#background_2&apos;); align-items: center; justify-content: center;">
+                    <ui:Label tabindex="-1" display-tooltip-when-elided="true" text="Game Over Text" name="EndGameTxt" style="-unity-text-align: upper-center; font-size: 35px;" />
+                    <ui:Button text="Main Menu" display-tooltip-when-elided="true" name="ToMainMenuButton" class="titleButton" style="width: 289px;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </MenuManager>
+</ui:UXML>

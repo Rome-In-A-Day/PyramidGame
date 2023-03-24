@@ -1,0 +1,41 @@
+.unity-text-element {
+}
+
+.unity-button {
+}
+
+.titleButton {
+    background-image: url('project://database/Assets/UI/Elements/ui_btn_menus.png?fileID=21300000&guid=d441b8203a8a90c46b69a395a4bee653&type=3#ui_btn_menus');
+    -unity-font: url('project://database/Assets/UI/Fonts/LilitaOne-Regular.ttf?fileID=12800000&guid=631d6eefd87fb42edb67943e6e63f758&type=3#LilitaOne-Regular');
+    background-color: rgba(56, 56, 56, 0);
+    color: rgb(255, 255, 255);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.titleButton:hover {
+    color: rgb(0, 255, 14);
+    opacity: 0.9;
+    transform-origin: right top;
+    translate: 26px 0;
+}
+
+.fadeOut {
+    transition-property: opacity, ignored;
+    transition-duration: 1.5s, 0s;
+    transition-delay: 0.25s, 0s;
+    opacity: 0;
+}
+
+.titleButtonNoHover {
+    background-image: url('project://database/Assets/UI/Elements/ui_btn_menus.png?fileID=21300000&guid=d441b8203a8a90c46b69a395a4bee653&type=3#ui_btn_menus');
+    -unity-font: url('project://database/Assets/UI/Fonts/LilitaOne-Regular.ttf?fileID=12800000&guid=631d6eefd87fb42edb67943e6e63f758&type=3#LilitaOne-Regular');
+    background-color: rgba(56, 56, 56, 0);
+    color: rgb(255, 255, 255);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
