@@ -78,13 +78,7 @@ public class MenuManager : VisualElement
         b_Start?.RegisterCallback<ClickEvent>(ev => StartClicked());
         m_MainScreen?.RegisterCallback<TransitionEndEvent>(ev => MainScreenTransition());
         b_Exit?.RegisterCallback<ClickEvent>(ev => ExitGame());
-        b_Options.SetEnabled(false);
-        b_Options.RegisterCallback<MouseEnterEvent>((evt) => {
-            evt.PreventDefault();
-            evt.StopImmediatePropagation();
-            b_Options.RemoveFromClassList("titleButton:hover");
-        }, TrickleDown.TrickleDown);
-
+        b_Options.SetEnabled(false); // Currently no options        
 
         // In Game Events
         b_Menu?.RegisterCallback<ClickEvent>(ev => ToInGameMenu());
@@ -96,58 +90,9 @@ public class MenuManager : VisualElement
         b_ToMainMenu?.RegisterCallback<ClickEvent>(ev => ToMainMenu());
     }
 
-    private void RestartGame()
-    {
-        game.Reset();
-        this.Q(InGame_Screen).pickingMode = PickingMode.Ignore;
-        this.Q(InGame_Menu).style.display = DisplayStyle.None;
-    }
-
-    private void ExitGame()
-    {
-        #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-        #endif
-        Application.Quit();
-    }
-
-    private void GameEnd(string endGameTxt)
-    {
-        DisableAll();
-        this.Q(End_Screen).style.display = DisplayStyle.Flex;
-        t_EndGameTxt.text = endGameTxt;
-
-    }
-
-    private void InGameMenuExit()
-    {
-        DisableAll();
-        game.Reset();
-        this.Q(InGame_Screen).pickingMode = PickingMode.Ignore;
-        this.Q(InGame_Menu).style.display = DisplayStyle.None;
-        this.Q(Main_TitleScreen).style.display = DisplayStyle.Flex;
-        
-    }
-
-    private void InGameMenuBack()
-    {
-        DisableAll();
-        this.Q(InGame_Screen).pickingMode = PickingMode.Ignore;
-        this.Q(InGame_Menu).style.display = DisplayStyle.None;
-        this.Q(InGame_Screen).style.display= DisplayStyle.Flex;        
-    }
-
-    private void ToInGameMenu()
-    {
-        DisableAll();
-        this.Q(InGame_Screen).pickingMode = PickingMode.Position;
-        this.Q(InGame_Screen).style.display = DisplayStyle.Flex;
-        this.Q(InGame_Menu).style.display = DisplayStyle.Flex;
-    }
-
     // Main Menu Handeling
     private void StartClicked()
-    {        
+    {
         DisableAll();
         this.Q(Main_TitleScreen).style.display = DisplayStyle.Flex;
         this.Q(Main_TitleScreen).AddToClassList("fadeOut");
@@ -159,23 +104,71 @@ public class MenuManager : VisualElement
         this.Q(Main_TitleScreen).RemoveFromClassList("fadeOut");
     }
 
-    private void OptionsClicked()
+    private void ExitGame()
     {
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+        Application.Quit();
+    }
+
+    // In Game Handling
+    private void ToInGameMenu()
+    {
+        DisableAll();
+        this.Q(InGame_Screen).pickingMode = PickingMode.Position;
+        this.Q(InGame_Screen).style.display = DisplayStyle.Flex;
+        this.Q(InGame_Menu).style.display = DisplayStyle.Flex;
+    }
+
+    private void InGameMenuExit()
+    {
+        DisableAll();
+        game.Reset();
+        this.Q(InGame_Screen).pickingMode = PickingMode.Ignore;
+        this.Q(InGame_Menu).style.display = DisplayStyle.None;
+        this.Q(Main_TitleScreen).style.display = DisplayStyle.Flex;
+
+    }
+
+    private void InGameMenuBack()
+    {
+        DisableAll();
+        this.Q(InGame_Screen).pickingMode = PickingMode.Ignore;
+        this.Q(InGame_Menu).style.display = DisplayStyle.None;
+        this.Q(InGame_Screen).style.display = DisplayStyle.Flex;
+    }
+
+    private void RestartGame()
+    {
+        game.Reset();
+        this.Q(InGame_Screen).pickingMode = PickingMode.Ignore;
+        this.Q(InGame_Menu).style.display = DisplayStyle.None;
+    }
+
+   // End Game Handling
+
+    private void GameEnd(string endGameTxt)
+    {
+        DisableAll();
+        this.Q(End_Screen).style.display = DisplayStyle.Flex;
+        t_EndGameTxt.text = endGameTxt;
 
     }
     
-    private void DisableAll()
-    {
-        this.Q(Main_TitleScreen).style.display = DisplayStyle.None;
-        this.Q(InGame_Screen).style.display = DisplayStyle.None;
-        this.Q(End_Screen).style.display = DisplayStyle.None;
-    }
-
     private void ToMainMenu()
     {
         DisableAll();        
         this.Q(Main_TitleScreen).style.display = DisplayStyle.Flex;
         game.Reset();
+    }
+
+    // Supporting Functions
+    private void DisableAll()
+    {
+        this.Q(Main_TitleScreen).style.display = DisplayStyle.None;
+        this.Q(InGame_Screen).style.display = DisplayStyle.None;
+        this.Q(End_Screen).style.display = DisplayStyle.None;
     }
 
 }

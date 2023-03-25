@@ -62,6 +62,7 @@ public class PyramidGame : MonoBehaviour
 
     private void CreateCards()
     {        
+        // Deals with the case if it's a restart by removing old gameobjects
         foreach (GameObject card in cards)
         {
             card.SetActive(false);
@@ -72,6 +73,7 @@ public class PyramidGame : MonoBehaviour
         pairedDiscard.Clear(); 
         deck.Clear();
         visiblePyramidCards.Clear();
+        // Creates a deck of 52 cards
         for (int i = 0; i < cardSuits.Count; i++)
         {
             for (int j = 0; j < cardLetters.Count; j++)
@@ -97,7 +99,7 @@ public class PyramidGame : MonoBehaviour
         {
             for (int cardCount = 1; cardCount <= rowCount; cardCount++)
             {
-                
+                // Calculates where each card should be placed
                 float xAdjustment = -1*(rowCount-1)/2f*SPACE_BETWEEN_CARDS + (cardCount-1)*SPACE_BETWEEN_CARDS;                    
                 Vector3 cardAjustment = new Vector3(xAdjustment, SPACE_BETWEEN_ROWS*(rowCount-1), 0);
                 cards[placementIndex].transform.position = startOfPyramid.position - cardAjustment;
@@ -155,18 +157,19 @@ public class PyramidGame : MonoBehaviour
 
     private int CheckGameState()
     {    
+        // Case where game is already over.
         if (this.gameState != 0)
         {
             return this.gameState;
-        }
-        // Look for possible moves left
-        IDictionary<int, int> avalibleValues = new Dictionary<int, int>();
-        List<GameObject> avalibleCards = new List<GameObject>();
+        }        
         // Can still draw cards so you have a "move"
         if (deck.Count > 0)
         {
             return 0;
         }
+        // Look for possible moves left
+        IDictionary<int, int> avalibleValues = new Dictionary<int, int>();
+        List<GameObject> avalibleCards = new List<GameObject>();
         // Get all accesible cards
         avalibleCards.AddRange(deck);
         if (discard.Count> 0)
@@ -194,6 +197,7 @@ public class PyramidGame : MonoBehaviour
         {
             int value;
             // Doesn't catch the King, but that's handeled above
+            // Checks if there is a card pair that adds to 13
             if(avalibleValues.TryGetValue(13 - kvp.Key, out value))
             {
                 return 0;
@@ -224,8 +228,8 @@ public class PyramidGame : MonoBehaviour
         {
             GameObject newCard = deck.Pop();
             //newCard.transform.position = discardCardPlacement.position;
-            newCard.GetComponent<Card>().MoveCard(discardCardPlacement.position);
             newCard.GetComponent<Card>().showFaceSprite(true);
+            newCard.GetComponent<Card>().MoveCard(discardCardPlacement.position);            
             if (discard.Count > 0)
             {
                 newCard.GetComponent<SpriteRenderer>().sortingOrder = discard.Peek().GetComponent<SpriteRenderer>().sortingOrder + 1;
@@ -277,28 +281,27 @@ public class PyramidGame : MonoBehaviour
     }
 
     private void RemoveCard(Card card)
-    {
-        //card.transform.position = pairedCardPlacement.position;
+    {        
         card.active = false;
         card.MoveCard(pairedCardPlacement.position);        
         if (pairedDiscard.Count > 0)
         {
             // Means the last card clicked shows up on top
-            card.GetComponent<SpriteRenderer>().sortingOrder = pairedDiscard.Peek().GetComponent<SpriteRenderer>().sortingOrder + 1;
-            //pairedDiscard.Peek().SetActive(false);
+            card.GetComponent<SpriteRenderer>().sortingOrder = pairedDiscard.Peek().GetComponent<SpriteRenderer>().sortingOrder + 1;            
         }
         pairedDiscard.Push(card.gameObject);
         if (visiblePyramidCards.Contains(card.gameObject))
         {
             visiblePyramidCards.Remove(card.gameObject);
         }
+        // Case where the discard card is one of the cards
         if (discard.Count > 0 && discard.Peek() == card.gameObject)
         {
             discard.Pop();
-        }
-        
+        }        
     }
 
+    // Tracks what cards can be used to pair
     public void AddToShowingPyramid(Card card)
     {
         visiblePyramidCards.Add(card.gameObject);

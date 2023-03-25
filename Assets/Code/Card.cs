@@ -64,6 +64,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public void setCardName(string cardName)
     {
         this.cardName = cardName;
+        // Loads the addressable asset, callback handels assignment
         AsyncOperationHandle<Sprite> spriteHandle = Addressables.LoadAssetAsync<Sprite>(this.cardName);        
         spriteHandle.Completed += OnLoadDone;
     }
@@ -117,10 +118,8 @@ public class Card : MonoBehaviour, IPointerClickHandler
     // Handles translating the cards to locations
     private IEnumerator SmoothMove(Vector3 newPosition)
     {                
-        transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothTime);
-        float temp = Mathf.Abs((transform.position.x - newPosition.x));
-        float temp2 = Mathf.Abs((transform.position.y - newPosition.y));
-        while (Mathf.Abs((transform.position.x - newPosition.x)) > 0.01 |
+        transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothTime);        
+        while (Mathf.Abs((transform.position.x - newPosition.x)) > 0.01 ||
             Mathf.Abs((transform.position.y - newPosition.y)) > 0.01)
         {
             transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothTime);
